@@ -52,5 +52,5 @@ def find(name):
 def email():
     send_email('hugesoft@126.com', u'马翔的电子邮件测试标题',
         'mail/new_user', user = 'hugesoft@126.com')
-    return render_template('index.html')
+    return render_template('user.html',user = 'email send test')
 
