@@ -8,10 +8,14 @@ class Config:
     FLASKY_MAIO_SUBJECT_PREFIX = '[Flasky]'
     FLASKY_MAIL_SENDER = 'Flasky Admin <flasky@example.com>'
     FLASKY_ADMIN = os.environ.get('FLASKY_ADMIN')
-
+    
     @staticmethod
     def init_app(app):
-        print 'mmx'
+        app.config['MAIL_SERVER'] = 'smtp.126.com'
+        app.config['MAIL_PORT'] = 25
+        app.config['MAIL_USE_TLS'] = True
+        app.config['MAIL_USERNAME'] = 'hugesoft@126.com'
+        app.config['MAIL_PASSWORD'] = 'enter0087!'
         pass
 
 class DevelopmentConfig(Config):

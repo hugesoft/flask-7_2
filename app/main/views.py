@@ -4,6 +4,7 @@ from flask import Flask,render_template
 from . import main
 from .. import db
 from ..models import Role,User
+from ..email import send_email
 
 @main.route('/')
 def index():
@@ -46,3 +47,10 @@ def find(name):
         return render_template('user.html', name = show.username)
     else:
         return render_template('user.html', name = name + u' 找不到.')
+
+@main.route('/mail')
+def email():
+    send_email('hugesoft@126.com', u'马翔的电子邮件测试标题',
+        'mail/new_user', user = 'hugesoft@126.com')
+    return render_template('index.html')
+
