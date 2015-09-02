@@ -1,14 +1,24 @@
 #coding:utf-8
 from flask import Flask,render_template
+from flask import session, redirect, url_for, flash
 
 from . import main
 from .. import db
 from ..models import Role,User
 from ..email import send_email
+from forms  import NameForm
 
-@main.route('/')
+@main.route('/',methods=['GET', 'POST'])
 def index():
-    return render_template('index.html')
+    form = NameForm()
+    if form.validate_on_submit():
+        old_name = session.get('name')
+        if old_name is not None and old_name != form.name.data:
+            flash(u'二次输入的姓名不一样！')
+        session['name'] = form.name.data
+        return redirect(url_for('.index'))
+    return render_template('index.html', 
+        form = form, name = session.get('name'))
 #'<h1>Hello World!test</h1>'
 
 @main.route('/user/<name>')
