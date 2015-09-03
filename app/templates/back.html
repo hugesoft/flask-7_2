@@ -8,14 +8,4 @@
     <h1>Hello, {% if name %}{{ name }}{% else %}Stranger{% endif %}!</h1>
 </div>
 {{ wtf.quick_form(form) }}
-<!--
-<form action="" method="post" name="login">
-    {{ form.hidden_tag() }}
-    <p>
-        please enter your OpenID:<br>
-        {{ form.name(size=10) }}<br>
-    </p>
-    <p><input type="submit" value="ok"></p>
-</form>
--->
 {% endblock %}
