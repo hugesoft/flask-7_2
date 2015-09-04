@@ -4,6 +4,11 @@ from flask.ext.bootstrap import Bootstrap
 from flask.ext.sqlalchemy import SQLAlchemy
 from config import config
 from flask.ext.mail import Mail
+from flask.ext.login import LoginManager
+
+login_manager = LoginManager()
+login_manager.session_protection = 'strong'
+login_manager.login_view = 'auth.login'
 
 bootstrap = Bootstrap()
 db = SQLAlchemy()
@@ -14,6 +19,8 @@ def create_app(config_name):
     
     app.config.from_object(config[config_name])
     config[config_name].init_app(app)
+
+    login_manager.init_app(app)
 
     mail.init_app(app)
     bootstrap.init_app(app)  
