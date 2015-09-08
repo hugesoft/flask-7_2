@@ -16,6 +16,7 @@ Flask-WTF==0.12
 idna==2.0
 ipaddress==1.0.14
 itsdangerous==0.24
+jieba==0.37
 Jinja2==2.8
 Mako==1.0.1
 MarkupSafe==0.23

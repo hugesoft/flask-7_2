@@ -33,5 +33,9 @@ def create_app(config_name):
     from .auth import auth as auth_blueprint
     app.register_blueprint(auth_blueprint, url_prefix='/auth')
 
+    #editor
+    from .edit import editor as edit_blueprint
+    app.register_blueprint(edit_blueprint, url_prefix='/edit')
+
     app.debug = True
     return app
