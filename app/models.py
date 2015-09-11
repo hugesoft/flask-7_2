@@ -16,7 +16,7 @@ class Content(db.Model):
 	content = db.Column(db.Text)    
 	
 	def __repr__(self):
-		return '<Content %r>' % self.content
+		return self.content
     
 class Role(db.Model):
     __tablename__ = 'roles'

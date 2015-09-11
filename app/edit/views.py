@@ -1,5 +1,4 @@
 #-*- coding: utf-8 -*-
-
 import os
 import re
 import json
@@ -11,20 +10,34 @@ from .. import db
 from ..models import Content,User
 from uploader import Uploader
 from Forms import UeditorForm
+from flask import session,redirect
 
-@editor.route('/',methods=['GET', 'POST'])
-def edit():
-    editData = None
+@editor.route('/',methods=['GET','POST'])
+def index():
     form = UeditorForm()
     if form.validate_on_submit():
-        editData = form.editor1.data
-        test_content = Content(title = 'test1', content =  editData)
-        db.session.add(test_content)
-        db.session.commit()       
+        content_data = Content(title='test1', content=form.editor1.data)
+        db.session.add(content_data)
+        db.session.commit()
 
-    print "Content: %s " % Content.query.all()
-    return render_template('edit/editor.html',form=form,editor1=editData)
+    return render_template('edit/editor.html',form=form,
+        editor1=form.editor1.data)
 	
+@editor.route('/<id>',methods=['GET','POST'])
+def get_content(id):
+    form = UeditorForm()
+    content_data = Content.query.filter_by(id=id).first()
+
+    if form.validate_on_submit(): 
+        content_data.content = form.editor1.data
+        db.session.add(content_data)
+        db.session.commit()    
+    else:
+        form.editor1.data = content_data.content
+    
+    return render_template('edit/editor.html',form=form,
+        editor1=form.editor1.data)  
+
 @editor.route('/upload/', methods=['GET', 'POST', 'OPTIONS'])
 def upload():
     """UEditor文件上传接口
