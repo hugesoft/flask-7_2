@@ -18,13 +18,15 @@
 <div>
     <h1>完整demo</h1>
 <form method="POST">
-{{ form.editor1(id="editor") }}
-    <script id="editor" type="text/plain" style="width:100%;height:300px"></script>
- 
+{{ form.editor1(rows=10,cols=80) }}	
 {{ form.submit() }}
-</form>    
+      
+<script>
+	UE.getEditor('editor').setHeight(500);
+</script>
+		
+</form>
 </div>
-
 
 <div id="btns">
     <div>

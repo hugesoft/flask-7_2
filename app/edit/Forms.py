@@ -4,5 +4,5 @@ from wtforms import StringField,SubmitField,TextAreaField
 from wtforms.validators import Required
 
 class UeditorForm(Form):
-	editor1 = TextAreaField('')
+	editor1 = TextAreaField(id='editor')
 	submit = SubmitField(u'提交')
