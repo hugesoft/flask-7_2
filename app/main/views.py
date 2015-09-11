@@ -11,7 +11,7 @@ from uploader import Uploader
 from .. import app
 from . import main
 from .. import db
-from ..models import Role,User
+from ..models import Role,User,Content
 from ..email import send_email
 from forms  import NameForm
 
@@ -161,7 +161,10 @@ def createdb():
     user_john = User(username = 'john', role = admin_role)
     user_susan = User(username = 'susan', role = user_role)
     user_david = User(username = 'david', role = user_role)
-
+    
+    test_content = Content(title = 'hugesoft', content = 'Hello World!')
+    db.session.add(test_content)
+	
     db.session.add(admin_role)
     db.session.add(mod_role)
     db.session.add(user_role)

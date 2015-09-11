@@ -8,28 +8,22 @@ from flask import render_template, url_for,make_response,request
 from . import editor
 from .. import app
 from .. import db
-from ..models import User
+from ..models import Content,User
 from uploader import Uploader
 from Forms import UeditorForm
 
 @editor.route('/',methods=['GET', 'POST'])
-def edit():	
-	editData = None
-	form = UeditorForm()
-	if form.validate_on_submit():
-		editData = form.editor1.data
-	print form.editor1.data
-	
-	return render_template('edit/editor.html',form=form,editor1=editData)
-'''	
-	if request.method == 'POST':
-		if request.form['editorValue']:
-			print request.form['editorValue']
-		return render_template('edit/editor.html', 
-			editorValue=request.form['editorValue'])
-	else:
-		return render_template('edit/editor.html')
-'''		
+def edit():
+    editData = None
+    form = UeditorForm()
+    if form.validate_on_submit():
+        editData = form.editor1.data
+        test_content = Content(title = 'test1', content =  editData)
+        db.session.add(test_content)
+        db.session.commit()       
+
+    print "Content: %s " % Content.query.all()
+    return render_template('edit/editor.html',form=form,editor1=editData)
 	
 @editor.route('/upload/', methods=['GET', 'POST', 'OPTIONS'])
 def upload():
