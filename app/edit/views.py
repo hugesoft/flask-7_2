@@ -25,8 +25,10 @@ def index():
 	
 @editor.route('/<id>',methods=['GET','POST'])
 def get_content(id):
+    print(id)
     form = UeditorForm()
-    content_data = Content.query.filter_by(id=id).first()
+ #   content_data = Content.query.filter_by(id=id).first()
+    content_data = Content.query.get(int(id))
 
     if form.validate_on_submit(): 
         content_data.content = form.editor1.data
